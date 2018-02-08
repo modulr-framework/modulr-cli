@@ -20,10 +20,10 @@ class Initialize {
 
         const info = Info.get();
 
-        // if (info.current) {
-        //     log('** Cannot initialize, this path currently has an initialization **'.red);
-        //     return Helper.displayInfo(info);
-        // }
+        if (info.current) {
+            log('** Cannot initialize, this path currently has an initialization **'.red);
+            return Helper.displayInfo(info);
+        }
 
         this.getProps().then((props) => {
 
