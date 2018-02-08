@@ -1,4 +1,4 @@
-# Modulr CLI Tool
+# ModulR JS CLI Tool
 
 Command line tool for [ModulR JS Framework](https://github.com/modulr-framework).
 
@@ -7,7 +7,7 @@ Command line tool for [ModulR JS Framework](https://github.com/modulr-framework)
 To Install, run:
 
 ```
-npm install -g modulr-cli
+npm install -g modulrjs-cli
 ```
 
 ## Commands
