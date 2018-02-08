@@ -1,6 +1,6 @@
 {
   "name": "modulrjs-cli",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "cli for modulrjs",
   "bin": {
     "modulr": "./index.js"

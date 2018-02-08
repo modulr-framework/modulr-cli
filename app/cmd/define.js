@@ -47,7 +47,7 @@ class Initialize {
             function next(vals) {
                 props = (vals) ? Object.assign({}, props, vals) : props;
                 // set module definition path
-                props.definePath = getDefinePath(props.dest || info.path);
+                props.definePath = getDefinePath(props.dest || info.path).replace(/^(\/)+/, '');
                 // set uid
                 props.uid = (!props.uid) ? info.current.uid : props.uid;
                 // destination folder
@@ -71,7 +71,7 @@ class Initialize {
                 message: 'Enter module name:',
                 validate: (val) => {
                     if (!val) { return 'Can\'t be empty'; }
-                    let invalid = val.match(/[^A-Za-z0-9_\.]+/);
+                    let invalid = val.match(/[^A-Za-z0-9_\-\.]+/);
                     let ret;
                     if (invalid) {
                         ret = `Character not allowed: ${invalid[0]}`;
