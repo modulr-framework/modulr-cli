@@ -31,8 +31,8 @@ class Initialize {
             if (initialization) {
                 next();
             } else {
-                // check whether this is a path after the base applicatino path
-                if (!getDefinePath(info.path)) {
+                // check whether this is a path after the base application path
+                if (getDefinePath(info.path) === null) {
                     log('** Cannot define a module **'.red);
                     log('Looks like you are not on the application base path..');
                     log('You can only define modules inside the base application folder..');
@@ -40,7 +40,7 @@ class Initialize {
                     log('* Base application folder  :', info.current.baseAppPath.cyan);
                     resolve(false);
                 } else {
-                    this.getProps().then(next);
+                    this.getProps(info).then(next);
                 }
             }
 
@@ -63,7 +63,7 @@ class Initialize {
         return res;
     }
 
-    getProps() {
+    getProps(info) {
         const questions = [
             {
                 type: 'input',
@@ -77,6 +77,13 @@ class Initialize {
                         ret = `Character not allowed: ${invalid[0]}`;
                     } else {
                         ret = true;
+                    }
+
+                    // make sure there are no existing file
+                    if (ret) {
+                        if (Helper.isFileExists(`${info.path}/${val}.js`)) {
+                            ret = `Filename ${val}.js already exists in this path!`;
+                        }
                     }
                     return ret;
                 }
