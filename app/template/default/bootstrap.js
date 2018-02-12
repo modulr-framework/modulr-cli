@@ -5,13 +5,13 @@
 
     var Instance = Modulr.config({
         // unique instance identifier
-        instance: "${uid}",
+        instance: '${uid}',
         // base domain url
         baseDomain: ${baseDomain},
         // base pathname
-        baseUrl: "${baseUrl}",
+        baseUrl: '${baseUrl}',
         // master file
-        masterFile: "${masterFile}",
+        masterFile: '${masterFile}',
         // other package paths
         packages: {
 
@@ -21,6 +21,6 @@
         }
     });
 
-    Instance.require(['main']);
+    // Instance.require(['main']);
 
 }(window.Modulr));

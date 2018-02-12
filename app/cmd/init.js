@@ -32,7 +32,7 @@ class Initialize {
                     let res = `'//' + window.location.host`;
                     if (domain) {
                         res = Helper.setBaseDomain(domain);
-                        res = `"${res}"`;
+                        res = `'${res}'`;
                     }
                     return res;
                 })(props.baseDomain),
