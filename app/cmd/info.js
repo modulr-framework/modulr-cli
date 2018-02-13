@@ -24,6 +24,8 @@ class Initialize {
         if (configFile) {
             const confData = JSON.parse(Helper.readFile(configFile));
             const appPath = configFile.replace(/\/\.modulrc$/, '');
+            const confBasePath = confData.basePath || config.defaults.basePath;
+
             // get information
             info.current = {
                 // uid
@@ -31,7 +33,7 @@ class Initialize {
                 // the path to the instance
                 path: appPath,
                 // the path to the instance base application folder
-                baseAppPath: appPath + ((!/^\//.test(confData.basePath)) ? '/' : '') + confData.basePath,
+                baseAppPath: appPath + ((!/^\//.test(confBasePath)) ? '/' : '') + confBasePath,
                 data: confData
             };
         }

@@ -9,4 +9,11 @@ config.path = {
     template: `${dir}/template`
 };
 
+config.defaults = {
+    // default base path assumed if none defined
+    // in previous initializations, or manual entries
+    // of the .modulrc config
+    basePath: '/app'
+};
+
 module.exports = config;
