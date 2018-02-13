@@ -52,6 +52,8 @@ class Initialize {
                 props.uid = (!props.uid) ? info.current.uid : props.uid;
                 // destination folder
                 props.dest = (!props.dest) ? info.path : props.dest;
+                // module path
+                props.modulePath = (props.definePath) ? ([props.definePath, props.filename].join('/')) : props.filename;
                 GenerateDefine(info, props).then(resolve);
             }
         });

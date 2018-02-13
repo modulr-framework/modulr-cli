@@ -20,8 +20,14 @@ module.exports = (cmd, args) => {
         case 'define':
             Define.set();
             break;
+        case '--version':
+            logVersion();
+            break;
     }
 
-
+    function logVersion() {
+        const pkg = JSON.parse(Helper.readFile(`${config.path.app}/../package.json`));
+        log(`v${pkg.version}`);
+    }
 
 };

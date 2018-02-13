@@ -1,4 +1,4 @@
-Modulr.define('${uid}:${definePath}/${filename}', [
+Modulr.define('${uid}:${modulePath}', [
     'require'
 ], function(require){
 

@@ -3,7 +3,7 @@
 const log = console.log;
 const App = require('./app/run');
 const cmd = process.argv[2];
-const cmdArr = ['info', 'init', 'define'];
+const cmdArr = ['info', 'init', 'define', '--version'];
 
 if (cmd === '--help') {
     log('Commands:', cmdArr.join(', '));

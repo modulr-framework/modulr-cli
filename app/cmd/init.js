@@ -25,6 +25,8 @@ class Initialize {
             return Helper.displayInfo(info);
         }
 
+        log('Initializing application at this path:'.yellow, info.path.cyan, '\n');
+
         this.getProps().then((props) => {
 
             props = Object.assign({}, props, {
@@ -40,6 +42,8 @@ class Initialize {
                 basePath: '/app'
             });
 
+            log('\nGenerating..');
+
             GenerateTemplate(info, props).then(() => {
                 const appBaseFolder = info.path + props.basePath;
                 log('Creating app base folder:', appBaseFolder.cyan);
@@ -49,6 +53,10 @@ class Initialize {
                     filename: 'main',
                     dest: appBaseFolder
                 }, true);
+
+                log('\nMake sure to update the "baseUrl" property in your bootstrap.js'.yellow);
+                log('Done!'.green);
+
             });
         });
     }
