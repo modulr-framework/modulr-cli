@@ -4,7 +4,7 @@
 const config = require('../config');
 const Helper = require(`${config.path.app}/helper`);
 const Define = require(`${config.path.app}/cmd/define`);
-const recursive = require('recursive-readdir');
+
 const colors = require('colors');
 const _ = require('lodash');
 const log = console.log;
