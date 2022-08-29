@@ -6,6 +6,7 @@ const Helper = require(`${config.path.app}/helper`);
 const Initialize = require(`${config.path.app}/cmd/init`);
 const Define = require(`${config.path.app}/cmd/define`);
 const Info = require(`${config.path.app}/cmd/info`);
+const Update = require(`${config.path.app}/cmd/update`);
 const log = console.log;
 
 module.exports = (cmd, args) => {
@@ -19,6 +20,9 @@ module.exports = (cmd, args) => {
             break;
         case 'define':
             Define.set();
+            break;
+        case 'update':
+            Update.set();
             break;
         case '--version':
             logVersion();

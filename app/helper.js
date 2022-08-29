@@ -4,6 +4,7 @@
 const CLIHelper = require('cli-helper').constructor;
 const colors = require('colors');
 const log = console.log;
+const fs = require('fs');
 
 class Helper extends CLIHelper {
 
@@ -70,6 +71,30 @@ class Helper extends CLIHelper {
             }
         }
         return res;
+    }
+
+    listDir(path) {
+        const self = this;
+
+        let files = [];
+        let paths = [];
+
+        fs.readdir(path, function(err, items) {
+            items.forEach((val) => {
+                if (self.isFileExists(val)) {
+                    if (/\.js$/i.test(val)) {
+                        files.push(val);
+                    }
+                } else if (self.isPathExists(val)) {
+                    paths.push(val);
+                }
+            });
+        });
+
+        return {
+            files: files,
+            paths: paths
+        };
     }
 }
 

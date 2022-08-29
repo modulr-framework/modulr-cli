@@ -61,13 +61,39 @@ class Initialize {
         });
     }
 
-    getProps() {
+    getProps(type, curr) {
 
-        const questions = [
+        curr = curr || {};
+
+        type = type || 'default';
+
+        let questions = [
             {
                 type: 'input',
                 name: 'uid',
-                message: 'Enter the unique Id:',
+                message: (curr.uid) ? `Update the unique Id [current: ${curr.uid})] (leave empty if the same):` : 'Enter the unique Id:',
+                validate: (val) => {
+                    if (curr.uid && !val) { return true; }
+                    if (!val) { return 'Can\'t be empty'; }
+                    let invalid = val.match(/[^A-Za-z0-9_\-\.]+/);
+                    let ret;
+                    if (invalid) {
+                        ret = `Character not allowed: ${invalid[0]}`;
+                    } else {
+                        ret = true;
+                    }
+                    return ret;
+                }
+            }
+        ];
+
+        if (type === 'update') {
+            // do nothing
+        } else {
+            questions = questions.concat({
+                type: 'input',
+                name: 'uid',
+                message: (curr.uid) ? `Update the unique Id [current: ${curr.uid})]:` : 'Enter the unique Id:',
                 validate: (val) => {
                     if (!val) { return 'Can\'t be empty'; }
                     let invalid = val.match(/[^A-Za-z0-9_\-\.]+/);
@@ -151,9 +177,8 @@ class Initialize {
                     }
                     return ret;
                 }
-            }
-
-        ];
+            });
+        }
 
         const res = new Promise((resolve, reject) => {
             inquirer.prompt(questions).then(answers => {
