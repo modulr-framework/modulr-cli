@@ -4,7 +4,8 @@
 const config = require('../config');
 const Helper = require(`${config.path.app}/helper`);
 const Define = require(`${config.path.app}/cmd/define`);
-
+const fs = require('fs');
+const path = require('path');
 const colors = require('colors');
 const _ = require('lodash');
 const log = console.log;
@@ -18,19 +19,24 @@ const App = (info, props) => {
         if (!Helper.isPathExists(source)) {
             return resolve(false);
         }
-        recursive(source, (err, files) => {
-            // Files is an array of filename
-            files.forEach((file) => {
+
+        function readdir(dir) {
+          fs.readdirSync(dir).forEach((val) => {
+              let file = `${dir}/${val}`;
+
+              if (fs.lstatSync(file).isFile()) {
                 const body = Helper.readFile(file);
-                const path = file.replace(source, "");
                 const tpl = _.template(body);
-                const dir = path.slice(0, path.lastIndexOf("/"));
-                const dest = info.path + path;
+                const dest = path.normalize(`${info.path}/${val}`);
                 log("Creating:", dest.cyan);
                 Helper.writeFile(dest, tpl(props));
-            });
-            resolve(true);
-        });
+              } else if (fs.lstatSync(file).isDirectory()) {
+                readdir(file);
+              }
+          });
+        }
+        readdir(source);
+        resolve(true);
     });
     return res;
 };
